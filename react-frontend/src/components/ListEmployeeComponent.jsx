@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import EmployeeService from '../services/EmployeeService'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+
+
+// const { id } = useParams()
 
 
 export default class ListEmployeeComponent extends Component {
@@ -11,6 +14,12 @@ export default class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
+        this.editEmployee = this.editEmployee.bind(this);
+
+    }
+
+    editEmployee(id){
+        localStorage.setItem('myData', id);
 
     }
 
@@ -50,6 +59,16 @@ export default class ListEmployeeComponent extends Component {
                                     <td>{employee.firstName}</td>
                                     <td>{employee.lastName}</td>
                                     <td>{employee.emailId}</td>
+                                    <td>
+                                        {/* <Link to="/update-employee" params={{ id: employee.id }}> */}
+                                        {/* <Link to={`/update-employee/${employee.id}`}> */}
+                                        {/* <Link to={{pathname:"/update-employee", state: { id: employee.id}}}> */}
+                                        <Link to={"/update-employees" } >
+                                            
+                                            <button onClick={()=>this.editEmployee(employee.id)} className="btn btn-info">Update</button>
+                                        </Link>
+                                        {/* <a href={'/employee/'+employee.id}><button className="btn btn-info">Update</button></a> */}
+                                    </td>
                                 </tr>
                             )
                         }
