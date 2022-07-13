@@ -15,6 +15,12 @@ export default class ListEmployeeComponent extends Component {
             employees: []
         }
         this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
+    }
+
+    deleteEmployee(id){
+        localStorage.setItem('myData', id);
+        EmployeeService.deleteEmployee(localStorage.getItem('myData'));
 
     }
 
@@ -66,6 +72,11 @@ export default class ListEmployeeComponent extends Component {
                                         <Link to={"/update-employees" } >
                                             
                                             <button onClick={()=>this.editEmployee(employee.id)} className="btn btn-info">Update</button>
+                                        </Link>
+
+                                        <Link to={"/" } >
+                                            
+                                            <button style ={{marginLeft: "10px"}} onClick={()=>this.deleteEmployee(employee.id)} className="btn btn-danger  ">Delete</button>
                                         </Link>
                                         {/* <a href={'/employee/'+employee.id}><button className="btn btn-info">Update</button></a> */}
                                     </td>
